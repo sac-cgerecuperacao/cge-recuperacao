@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGE Recuperação Tributária | Recupere Tributos Pagos Indevidamente</title>
+  <meta name="description" content="Especialistas em identificar e recuperar créditos tributários pagos indevidamente. Análise gratuita. Risco zero. Honorários apenas no êxito. Desde 1990." />
+  <meta name="keywords" content="recuperação tributária, créditos tributários, impostos pagos indevidamente, PIS COFINS, recuperação fiscal, CGE contadores" />
+  <meta property="og:title" content="CGE Recuperação Tributária | Recupere o que é seu" />
+  <meta property="og:description" content="95% das empresas pagam mais impostos do que deveriam. Diagnóstico gratuito. Sem risco." />
+  <meta property="og:type" content="website" />
+
+  <!-- Meta Pixel placeholder -->
+  <!-- <script>!function(f,b,e,v,n,t,s)...</script> -->
+  <!-- Google Analytics placeholder -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_ID"></script> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --black2: #111111;
+      --black3: #181818;
+      --black4: #1f1f1f;
+      --gold: #C9A55A;
+      --gold-light: #E2C07A;
+      --gold-dark: #8B6914;
+      --gold-pale: rgba(201,165,90,0.12);
+      --gold-border: rgba(201,165,90,0.25);
+      --white: #F7F4EF;
+      --white-dim: rgba(247,244,239,0.65);
+      --white-faint: rgba(247,244,239,0.12);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Outfit', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); }
+
+    /* ─── UTILS ─── */
+    .gold { color: var(--gold); }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--gold);
+    }
+    .gold-line { width: 48px; height: 2px; background: linear-gradient(90deg, var(--gold-dark), var(--gold-light)); margin: 0 auto 32px; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes shimmer { 0%,100% { opacity:0.6; } 50% { opacity:1; } }
+    @keyframes floatY { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+    @keyframes rotateSlow { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+    @keyframes pulse { 0%,100% { box-shadow:0 0 0 0 rgba(201,165,90,0.4); } 70% { box-shadow:0 0 0 10px rgba(201,165,90,0); } }
+
+    .anim-up { animation: fadeUp 0.8s ease both; }
+    .d1 { animation-delay:0.1s; } .d2 { animation-delay:0.25s; } .d3 { animation-delay:0.4s; } .d4 { animation-delay:0.55s; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 24px;
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(201,165,90,0.08);
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      height: 60px;
+      border-bottom-color: var(--gold-border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 14px; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .nav-logo-text { display: flex; flex-direction: column; }
+    .nav-logo-name {
+      font-family: var(--serif);
+      font-size: 18px; font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      line-height: 1.1;
+    }
+    .nav-logo-sub {
+      font-size: 9px; font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--white-dim);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      padding: 8px 20px;
+      border-radius: 2px;
+      font-size: 12px !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase;
+      transition: all 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; color: var(--gold); font-size: 22px; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 140px 0 100px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 50%, rgba(139,105,20,0.09) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 15% 80%, rgba(201,165,90,0.05) 0%, transparent 60%),
+        var(--black);
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(201,165,90,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,165,90,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 720px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gold-pale);
+      border: 1px solid var(--gold-border);
+      padding: 7px 16px;
+      border-radius: 2px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: shimmer 2s infinite;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(44px, 6vw, 80px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-subtitle {
+      font-size: clamp(16px, 1.8vw, 19px);
+      font-weight: 300;
+      color: var(--white-dim);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+    .hero-subtitle strong { color: var(--white); font-weight: 500; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      color: var(--black);
+      padding: 16px 36px;
+      border: none; border-radius: 2px;
+      font-family: var(--sans);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.15);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+    .btn-primary:hover::after { transform: translateX(0); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,165,90,0.3); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 15px 32px;
+      border: 1px solid rgba(247,244,239,0.25);
+      border-radius: 2px;
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.08em;
+      cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+    .hero-stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-stat-item span:first-child {
+      font-family: var(--serif);
+      font-size: 36px; font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-stat-item span:last-child {
+      font-size: 12px; font-weight: 400;
+      color: var(--white-dim);
+      letter-spacing: 0.06em;
+    }
+    .hero-stat-divider { width: 1px; background: var(--gold-border); align-self: stretch; }
+
+    .hero-side {
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 420px; height: 420px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--gold-border);
+    }
+    .ring1 { width: 420px; height: 420px; animation: rotateSlow 30s linear infinite; }
+    .ring2 { width: 300px; height: 300px; animation: rotateSlow 20s linear infinite reverse; border-style: dashed; }
+    .ring3 { width: 180px; height: 180px; background: var(--gold-pale); border-color: var(--gold); }
+    .hero-ring-center {
+      position: relative; z-index: 2;
+      font-family: var(--serif);
+      font-size: 52px; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 60px rgba(201,165,90,0.4);
+      animation: floatY 4s ease-in-out infinite;
+    }
+
+    /* ─── TRUST BAR ─── */
+    #trust-bar {
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+      background: linear-gradient(90deg, var(--black2), var(--black3), var(--black2));
+      padding: 20px 0;
+    }
+    .trust-items { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; }
+    .trust-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 32px;
+      border-right: 1px solid var(--gold-border);
+      font-size: 13px; font-weight: 400;
+      color: var(--white-dim);
+      letter-spacing: 0.04em;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item svg { color: var(--gold); flex-shrink: 0; }
+
+    /* ─── SECTIONS BASE ─── */
+    section { padding: 100px 0; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 17px; font-weight: 300;
+      color: var(--white-dim);
+      max-width: 560px; margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── PROBLEM ─── */
+    #problem { background: var(--black2); }
+    .problem-headline {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--white);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+    .problem-highlight { color: var(--gold); font-style: italic; }
+    .problem-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--gold-border); border: 1px solid var(--gold-border); }
+    .problem-card {
+      background: var(--black2);
+      padding: 40px 32px;
+      transition: background 0.3s;
+    }
+    .problem-card:hover { background: var(--black3); }
+    .problem-card-num {
+      font-family: var(--serif);
+      font-size: 52px; font-weight: 700;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .problem-card-title {
+      font-family: var(--serif);
+      font-size: 22px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .problem-card-text { font-size: 14px; color: var(--white-dim); line-height: 1.7; }
+
+    /* ─── HOW IT WORKS ─── */
+    #how { background: var(--black); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 56px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+    }
+    .step { text-align: center; padding: 0 24px; position: relative; }
+    .step-num {
+      width: 64px; height: 64px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif);
+      font-size: 24px; font-weight: 700;
+      color: var(--gold);
+      margin: 0 auto 28px;
+      background: var(--black);
+      position: relative; z-index: 2;
+      transition: all 0.3s;
+    }
+    .step:hover .step-num { background: var(--gold); color: var(--black); box-shadow: 0 0 30px rgba(201,165,90,0.4); }
+    .step-icon { font-size: 28px; margin-bottom: 16px; }
+    .step-title {
+      font-family: var(--serif);
+      font-size: 20px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .step-text { font-size: 14px; color: var(--white-dim); line-height: 1.7; }
+    .step-note {
+      margin-top: 12px;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ─── BENEFICIOS ─── */
+    #beneficios { background: var(--black2); }
+    .beneficios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--gold-border); border: 1px solid var(--gold-border); }
+    .beneficio-item {
+      background: var(--black2);
+      padding: 40px;
+      display: flex; gap: 24px;
+      transition: background 0.3s;
+    }
+    .beneficio-item:hover { background: var(--black3); }
+    .beneficio-icon {
+      width: 52px; height: 52px; flex-shrink: 0;
+      border: 1px solid var(--gold-border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      transition: all 0.3s;
+    }
+    .beneficio-item:hover .beneficio-icon { border-color: var(--gold); background: var(--gold-pale); }
+    .beneficio-body {}
+    .beneficio-title {
+      font-family: var(--serif);
+      font-size: 20px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .beneficio-text { font-size: 14px; color: var(--white-dim); line-height: 1.7; }
+
+    /* ─── DIFERENCIAIS ─── */
+    #diferenciais { background: var(--black); }
+    .diferenciais-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .diferenciais-text .section-label { justify-content: flex-start; }
+    .diferenciais-text .section-label::before { display: block; }
+    .diferenciais-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .diferenciais-desc {
+      font-size: 16px; font-weight: 300;
+      color: var(--white-dim);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+    .diferencial-list { display: flex; flex-direction: column; gap: 16px; }
+    .diferencial-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 24px;
+      border: 1px solid var(--gold-border);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .diferencial-item:hover { border-color: var(--gold); background: var(--gold-pale); }
+    .diferencial-check {
+      width: 24px; height: 24px; flex-shrink: 0;
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 12px;
+      margin-top: 1px;
+    }
+    .diferencial-item-body {}
+    .diferencial-item-title {
+      font-size: 15px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .diferencial-item-text { font-size: 13px; color: var(--white-dim); }
+    .diferenciais-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dif-card {
+      background: linear-gradient(135deg, var(--black3), var(--black4));
+      border: 1px solid var(--gold-border);
+      padding: 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .dif-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    }
+    .dif-card-year {
+      font-family: var(--serif);
+      font-size: 80px; font-weight: 700;
+      color: var(--gold);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: -16px;
+    }
+    .dif-card-since {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .dif-card-title {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .dif-card-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .dif-metric { padding: 20px; background: var(--black); border: 1px solid var(--gold-border); }
+    .dif-metric-val {
+      font-family: var(--serif);
+      font-size: 32px; font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .dif-metric-label { font-size: 12px; color: var(--white-dim); }
+
+    /* ─── TECNOLOGIA ─── */
+    #tecnologia {
+      background: var(--black2);
+      position: relative; overflow: hidden;
+    }
+    #tecnologia::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,165,90,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .tech-card {
+      background: var(--black);
+      border: 1px solid var(--gold-border);
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .tech-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .tech-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .tech-card:hover::after { transform: scaleX(1); }
+    .tech-card-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+    .tech-card-title {
+      font-family: var(--serif);
+      font-size: 20px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .tech-card-text { font-size: 14px; color: var(--white-dim); line-height: 1.7; }
+
+    /* ─── PÚBLICO ─── */
+    #publico { background: var(--black); }
+    .publico-intro {
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 400;
+      color: var(--white-dim);
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+      line-height: 1.5;
+    }
+    .publico-intro strong { color: var(--gold); font-style: italic; }
+    .publico-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .publico-tag {
+      border: 1px solid var(--gold-border);
+      padding: 20px 16px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .publico-tag:hover { border-color: var(--gold); background: var(--gold-pale); }
+    .publico-tag-icon { font-size: 28px; display: block; margin-bottom: 10px; }
+    .publico-tag-name { font-size: 14px; font-weight: 500; color: var(--white); letter-spacing: 0.03em; }
+
+    /* ─── FAQ ─── */
+    #faq { background: var(--black2); }
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--gold-border);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 0;
+      text-align: left;
+      color: var(--white);
+      font-family: var(--serif);
+      font-size: 20px; font-weight: 500;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border: 1px solid var(--gold-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--gold);
+      transition: all 0.3s;
+    }
+    .faq-item.open .faq-icon { background: var(--gold); color: var(--black); transform: rotate(45deg); }
+    .faq-answer {
+      font-size: 15px; color: var(--white-dim);
+      line-height: 1.8;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 28px; }
+    .faq-answer strong { color: var(--gold); font-weight: 500; }
+
+    /* ─── CTA FINAL ─── */
+    #cta-final {
+      background: linear-gradient(135deg, var(--black), var(--black3));
+      position: relative; overflow: hidden;
+      text-align: center;
+      padding: 120px 0;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,165,90,0.1) 0%, transparent 70%);
+    }
+    .cta-final-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .cta-final-label::before, .cta-final-label::after {
+      content: ''; display: block;
+      width: 28px; height: 1px; background: var(--gold);
+    }
+    .cta-final-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 24px;
+      position: relative; z-index: 2;
+    }
+    .cta-final-title em { color: var(--gold); font-style: italic; display: block; }
+    .cta-final-sub {
+      font-size: 17px; font-weight: 300;
+      color: var(--white-dim);
+      max-width: 520px; margin: 0 auto 48px;
+      line-height: 1.7;
+      position: relative; z-index: 2;
+    }
+    .cta-final-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2; }
+    .cta-final-disclaimer {
+      margin-top: 32px;
+      font-size: 12px; color: var(--white-dim);
+      letter-spacing: 0.04em;
+      position: relative; z-index: 2;
+    }
+
+    /* ─── FORMULARIO ─── */
+    #formulario { background: var(--black2); }
+    .form-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .form-left .section-label { justify-content: flex-start; }
+    .form-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .form-desc {
+      font-size: 15px; font-weight: 300;
+      color: var(--white-dim);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+    .form-perks { display: flex; flex-direction: column; gap: 14px; }
+    .form-perk {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--white-dim);
+    }
+    .form-perk::before {
+      content: '✓';
+      color: var(--gold); font-weight: 600;
+      font-size: 14px;
+    }
+    .form-right {
+      background: var(--black);
+      border: 1px solid var(--gold-border);
+      padding: 48px 40px;
+      position: relative;
+    }
+    .form-right::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+    }
+    .form-right .form-heading {
+      font-family: var(--serif);
+      font-size: 22px; font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .form-right .form-sub {
+      font-size: 13px; color: var(--white-dim);
+      margin-bottom: 32px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      background: var(--black2);
+      border: 1px solid var(--gold-border);
+      color: var(--white);
+      padding: 14px 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-group input::placeholder { color: rgba(247,244,239,0.3); }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A55A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+    .form-group select option { background: var(--black2); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      color: var(--black);
+      padding: 18px;
+      border: none; border-radius: 0;
+      font-family: var(--sans);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 30px rgba(201,165,90,0.3); }
+    .form-disclaimer {
+      font-size: 11px; color: rgba(247,244,239,0.35);
+      text-align: center; margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--gold-border);
+      padding: 60px 0 32px;
+    }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .nav-logo { margin-bottom: 20px; }
+    .footer-tagline {
+      font-size: 14px; color: var(--white-dim);
+      line-height: 1.7; margin-bottom: 24px;
+      max-width: 320px;
+    }
+    .footer-contact { display: flex; flex-direction: column; gap: 8px; }
+    .footer-contact a {
+      font-size: 13px; color: var(--white-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-col-title {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col-links a {
+      font-size: 14px; color: var(--white-dim);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col-links a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--gold-border);
+      padding-top: 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom-text {
+      font-size: 12px; color: rgba(247,244,239,0.3);
+      letter-spacing: 0.04em;
+    }
+    .footer-bottom-since {
+      font-size: 12px; color: var(--gold);
+      font-family: var(--serif);
+      font-style: italic;
+    }
+
+    /* ─── WHATSAPP FLOAT ─── */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px;
+      z-index: 9998;
+      width: 60px; height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 30px; height: 30px; fill: white; }
+    .whatsapp-tooltip {
+      position: absolute; right: 72px; top: 50%;
+      transform: translateY(-50%);
+      background: var(--black2);
+      border: 1px solid var(--gold-border);
+      color: var(--white);
+      font-size: 12px; font-weight: 500;
+      white-space: nowrap;
+      padding: 8px 14px;
+      border-radius: 2px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .whatsapp-float:hover .whatsapp-tooltip { opacity: 1; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .hero-side { display: none; }
+      .diferenciais-wrapper { grid-template-columns: 1fr; }
+      .form-wrapper { grid-template-columns: 1fr; }
+      .beneficios-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 70px 0; }
+      .hero-stats { gap: 28px; }
+      .hero-stat-divider { display: none; }
+      nav .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .problem-cards { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .trust-item { padding: 10px 16px; border-right: none; border-bottom: 1px solid var(--gold-border); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">
+    <div class="nav-logo-icon">CGE</div>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">CGE</span>
+      <span class="nav-logo-sub">Contadores & Advogados</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#how">Como Funciona</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="#publico">Setores</a>
+    <a href="#faq">FAQ</a>
+    <a href="#formulario" class="nav-cta">Análise Gratuita</a>
+  </div>
+  <button class="nav-mobile-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow anim-up d1">Desde 1990 · Inteligência Tributária</div>
+      <h1 class="hero-title anim-up d2">
+        Sua empresa pode ter
+        <em>dinheiro parado<br/>com o governo.</em>
+      </h1>
+      <p class="hero-subtitle anim-up d3">
+        Recuperamos créditos tributários pagos indevidamente nos últimos <strong>5 anos</strong>. Análise gratuita, processo 100% legal e honorários <strong>somente no êxito</strong>.
+      </p>
+      <div class="hero-actions anim-up d4">
+        <a href="#formulario" class="btn-primary">
+          &#128269; Solicitar Diagnóstico Gratuito
+        </a>
+        <a href="https://wa.me/5519316720331" target="_blank" class="btn-secondary">
+          &#128172; Falar no WhatsApp
+        </a>
+      </div>
+      <div class="hero-stats anim-up d4">
+        <div class="hero-stat-item">
+          <span>35+</span>
+          <span>Anos de experiência</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-item">
+          <span>95%</span>
+          <span>Das empresas pagam a mais</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-item">
+          <span>5 anos</span>
+          <span>Retroativos recuperáveis</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-item">
+          <span>R$0</span>
+          <span>Custo inicial</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="hero-ring ring1"></div>
+    <div class="hero-ring ring2"></div>
+    <div class="hero-ring ring3"></div>
+    <div class="hero-ring-center">CGE</div>
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ─── -->
+<div id="trust-bar">
+  <div class="container">
+    <div class="trust-items">
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        100% Legal · Receita Federal
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Diagnóstico em 10 minutos
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Sem custo inicial
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Honorários apenas no êxito
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Tecnologia e Software Fiscal
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="justify-content:center">O Problema</div>
+      <p class="problem-headline">
+        O governo não te avisa quando você<br/>
+        pagou <span class="problem-highlight">impostos a mais.</span>
+      </p>
+    </div>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <div class="problem-card-num">01</div>
+        <div class="problem-card-title">Complexidade Tributária</div>
+        <p class="problem-card-text">O sistema tributário brasileiro é um dos mais complexos do mundo. Erros na apuração de PIS, COFINS, ICMS e outros tributos são comuns — e custam caro.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">02</div>
+        <div class="problem-card-title">Prescrição de 5 Anos</div>
+        <p class="problem-card-text">Você tem apenas 60 meses para recuperar o que pagou indevidamente. Cada mês sem análise é dinheiro prescrito definitivamente.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">03</div>
+        <div class="problem-card-title">Falta de Auditoria Fiscal</div>
+        <p class="problem-card-text">A maioria das empresas nunca realizou uma auditoria tributária profunda. Créditos acumulados passam despercebidos ano após ano.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-num">04</div>
+        <div class="problem-card-title">Impacto no Caixa</div>
+        <p class="problem-card-text">Tributos pagos a mais representam capital de giro perdido. Recuperá-los significa oxigenar o caixa da sua empresa sem endividamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section id="how">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Como Funciona</div>
+      <h2 class="section-title">Processo simples.<br/><span class="gold">Resultado concreto.</span></h2>
+      <p class="section-subtitle">Do diagnóstico à recuperação — tudo conduzido por especialistas, com tecnologia e segurança jurídica.</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Reunião Estratégica</div>
+        <p class="step-text">Uma conversa rápida de aproximadamente 10 minutos para entender o perfil tributário da sua empresa.</p>
+        <p class="step-note">Sem custo · Sem compromisso</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Diagnóstico Digital</div>
+        <p class="step-text">Com seu Certificado Digital A1, acessamos o histórico fiscal dos últimos 5 anos e cruzamos os dados com nosso software especializado.</p>
+        <p class="step-note">Tecnologia + Expertise</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Apuração dos Créditos</div>
+        <p class="step-text">Identificamos e calculamos com precisão todos os tributos pagos indevidamente. Você recebe um relatório detalhado antes de qualquer contrato.</p>
+        <p class="step-note">Transparência total</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Recuperação Garantida</div>
+        <p class="step-text">Após aprovação, conduzimos todo o processo junto à Receita Federal. Você paga apenas uma porcentagem sobre o valor efetivamente recuperado.</p>
+        <p class="step-note">Risco zero para sua empresa</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BENEFICIOS ─── -->
+<section id="beneficios">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Por Que Recuperar</div>
+      <h2 class="section-title">O dinheiro é <span class="gold">seu.</span></h2>
+      <p class="section-subtitle">Recuperar tributos não é bônus — é a restituição de valores que sempre pertenceram à sua empresa.</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="beneficios-grid">
+      <div class="beneficio-item">
+        <div class="beneficio-icon">💰</div>
+        <div class="beneficio-body">
+          <div class="beneficio-title">Capital de Giro Imediato</div>
+          <p class="beneficio-text">Valores recuperados entram diretamente no caixa da empresa, sem contração de dívidas ou dilução societária.</p>
+        </div>
+      </div>
+      <div class="beneficio-item">
+        <div class="beneficio-icon">🔒</div>
+        <div class="beneficio-body">
+          <div class="beneficio-title">Risco Zero Garantido</div>
+          <p class="beneficio-text">Processo 100% legal, homologado pela Receita Federal. Sem multas, sem autuações, sem risco jurídico para a empresa.</p>
+        </div>
+      </div>
+      <div class="beneficio-item">
+        <div class="beneficio-icon">⚖️</div>
+        <div class="beneficio-body">
+          <div class="beneficio-title">Compensação ou Restituição</div>
+          <p class="beneficio-text">Os créditos podem ser utilizados para abater tributos futuros (compensação) ou recebidos em dinheiro (restituição), conforme a estratégia mais vantajosa.</p>
+        </div>
+      </div>
+      <div class="beneficio-item">
+        <div class="beneficio-icon">📊</div>
+        <div class="beneficio-body">
+          <div class="beneficio-title">Redução da Carga Tributária</div>
+          <p class="beneficio-text">Além da recuperação retroativa, identificamos oportunidades de redução legal da tributação para os próximos exercícios.</p>
+        </div>
+      </div>
+      <div class="beneficio-item">
+        <div class="beneficio-icon">🏛️</div>
+        <div class="beneficio-body">
+          <div class="beneficio-title">Conformidade Fiscal Total</div>
+          <p class="beneficio-text">O processo de diagnóstico identifica passivos ocultos e corrige inconsistências, protegendo a empresa de autuações futuras.</p>
+        </div>
+      </div>
+      <div class="beneficio-item">
+        <div class="beneficio-icon">🤝</div>
+        <div class="beneficio-body">
+          <div class="beneficio-title">Modelo de Êxito</div>
+          <p class="beneficio-text">Honorários sobre o valor recuperado, cobrados somente após o crédito estar disponível. Se não recuperar, não paga.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DIFERENCIAIS ─── -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="diferenciais-wrapper">
+      <div class="diferenciais-text">
+        <div class="section-label">Nossos Diferenciais</div>
+        <h2 class="diferenciais-title">Por que escolher<br/><span class="gold">a CGE?</span></h2>
+        <p class="diferenciais-desc">Em mais de 35 anos de atuação, construímos uma metodologia proprietária que combina expertise jurídica, contábil e tecnologia de ponta para maximizar a recuperação dos nossos clientes.</p>
+        <div class="diferencial-list">
+          <div class="diferencial-item">
+            <div class="diferencial-check">✓</div>
+            <div class="diferencial-item-body">
+              <div class="diferencial-item-title">Equipe Multidisciplinar Especializada</div>
+              <p class="diferencial-item-text">Contadores seniores e advogados tributários atuando em conjunto em cada caso.</p>
+            </div>
+          </div>
+          <div class="diferencial-item">
+            <div class="diferencial-check">✓</div>
+            <div class="diferencial-item-body">
+              <div class="diferencial-item-title">Software Proprietário de Análise Fiscal</div>
+              <p class="diferencial-item-text">Tecnologia desenvolvida para cruzamento massivo de dados fiscais com precisão e velocidade.</p>
+            </div>
+          </div>
+          <div class="diferencial-item">
+            <div class="diferencial-check">✓</div>
+            <div class="diferencial-item-body">
+              <div class="diferencial-item-title">Condução Completa do Processo</div>
+              <p class="diferencial-item-text">Da análise à homologação pela Receita Federal — você não precisa se preocupar com burocracia.</p>
+            </div>
+          </div>
+          <div class="diferencial-item">
+            <div class="diferencial-check">✓</div>
+            <div class="diferencial-item-body">
+              <div class="diferencial-item-title">Transparência Total</div>
+              <p class="diferencial-item-text">Você vê os valores identificados antes de assinar qualquer contrato. Sem surpresas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diferenciais-visual">
+        <div class="dif-card">
+          <div class="dif-card-year">35</div>
+          <div class="dif-card-since">Desde 1990</div>
+          <div class="dif-card-title">Confiança construída<br/>ao longo de décadas</div>
+          <div class="dif-card-metrics">
+            <div class="dif-metric">
+              <div class="dif-metric-val">60</div>
+              <div class="dif-metric-label">Meses retroativos</div>
+            </div>
+            <div class="dif-metric">
+              <div class="dif-metric-val">0%</div>
+              <div class="dif-metric-label">Custo inicial</div>
+            </div>
+            <div class="dif-metric">
+              <div class="dif-metric-val">%</div>
+              <div class="dif-metric-label">Só no êxito</div>
+            </div>
+            <div class="dif-metric">
+              <div class="dif-metric-val">100%</div>
+              <div class="dif-metric-label">Legal e seguro</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TECNOLOGIA ─── -->
+<section id="tecnologia">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Inteligência Fiscal</div>
+      <h2 class="section-title">Tecnologia a serviço<br/>da <span class="gold">sua recuperação.</span></h2>
+      <p class="section-subtitle">Utilizamos software especializado para análise do SPED, EFD, ECD e cruzamento de dados fiscais com precisão que o olho humano não alcança.</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <span class="tech-card-icon">🔍</span>
+        <div class="tech-card-title">Análise SPED Completa</div>
+        <p class="tech-card-text">Processamento de arquivos EFD-ICMS, EFD-Contribuições e ECF para identificação automática de inconsistências e créditos.</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-card-icon">🧮</span>
+        <div class="tech-card-title">Cruzamento Inteligente</div>
+        <p class="tech-card-text">Algoritmos que cruzam notas fiscais, apurações e declarações para identificar divergências e oportunidades de recuperação.</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-card-icon">📋</span>
+        <div class="tech-card-title">Relatório Executivo</div>
+        <p class="tech-card-text">Após a análise, você recebe um relatório completo com os créditos identificados, fundamentação legal e memória de cálculo.</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-card-icon">🔐</span>
+        <div class="tech-card-title">Certificado Digital A1</div>
+        <p class="tech-card-text">Acesso autorizado ao histórico fiscal via Certificado Digital, garantindo segurança e rastreabilidade de todo o processo.</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-card-icon">⚡</span>
+        <div class="tech-card-title">Velocidade de Análise</div>
+        <p class="tech-card-text">O que levaria meses em análise manual é processado em dias com nossa tecnologia, acelerando a chegada dos créditos.</p>
+      </div>
+      <div class="tech-card">
+        <span class="tech-card-icon">🏦</span>
+        <div class="tech-card-title">Gestão de Compensações</div>
+        <p class="tech-card-text">Gerenciamos o processo de compensação ou pedido de restituição junto à Receita Federal até a efetiva liberação dos valores.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PÚBLICO ─── -->
+<section id="publico">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Quem Atendemos</div>
+      <h2 class="section-title">A pergunta não é <em style="font-style:italic">se</em>.<br/><span class="gold">É quanto.</span></h2>
+    </div>
+    <p class="publico-intro">
+      Empresas com faturamento relevante em qualquer setor têm <strong>alto potencial de recuperação</strong>. Especialmente aquelas no Lucro Real e Lucro Presumido.
+    </p>
+    <div class="publico-grid">
+      <div class="publico-tag"><span class="publico-tag-icon">🏭</span><span class="publico-tag-name">Indústrias</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">🛒</span><span class="publico-tag-name">E-commerces</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">🚚</span><span class="publico-tag-name">Transportadoras</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">🏥</span><span class="publico-tag-name">Clínicas</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">📊</span><span class="publico-tag-name">Lucro Real</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">📈</span><span class="publico-tag-name">Lucro Presumido</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">🛍️</span><span class="publico-tag-name">Sellers</span></div>
+      <div class="publico-tag"><span class="publico-tag-icon">🏢</span><span class="publico-tag-name">Empresas PME</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Perguntas Frequentes</div>
+      <h2 class="section-title">Dúvidas <span class="gold">esclarecidas.</span></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Isso é legal? Não vou ter problema com a Receita Federal?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Sim, é <strong>100% legal e autorizado</strong> pela Receita Federal. A recuperação tributária é um direito do contribuinte, garantido pela legislação brasileira. O processo é totalmente documentado, com fundamentação legal sólida, e segue todos os procedimentos administrativos previstos no Código Tributário Nacional.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Qual o custo para minha empresa iniciar o processo?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <strong>Zero.</strong> O diagnóstico é completamente gratuito. Não há nenhum custo inicial — nem para análise, nem para a apuração dos créditos. Nossos honorários são uma porcentagem sobre o valor efetivamente recuperado, cobrados apenas após a disponibilização dos créditos para a sua empresa.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          O que é o Certificado Digital A1 e como funciona?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          O Certificado Digital A1 é uma assinatura eletrônica da empresa que permite acesso seguro ao portal da Receita Federal. Com ele, acessamos o histórico fiscal da empresa para realizar o diagnóstico. O processo é seguro, rastreável e você mantém total controle sobre o acesso concedido.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Quanto tempo leva para minha empresa receber os créditos?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          O prazo varia conforme o tipo de recuperação e o volume de créditos. Em geral, o processo completo — da análise ao aproveitamento dos créditos — leva de <strong>2 a 12 meses</strong>. Para compensação com tributos futuros, o impacto pode ser mais imediato.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Meu contador já cuida da parte tributária. Isso é diferente?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Sim, completamente diferente. A contabilidade rotineira foca na apuração correta dos tributos <strong>futuros</strong>. A recuperação tributária analisa o <strong>histórico retroativo</strong> dos últimos 5 anos em busca de tributos pagos indevidamente — uma auditoria fiscal profunda que a maioria dos escritórios contábeis não realiza no dia a dia.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Toda empresa tem créditos a recuperar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          Não podemos garantir sem análise — e é por isso que o diagnóstico é gratuito. O que sabemos é que <strong>95% das empresas</strong> analisadas apresentam algum tipo de crédito tributário. O potencial varia conforme o setor, regime tributário, volume de operações e histórico fiscal.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-final-label">Próximo Passo</div>
+    <h2 class="cta-final-title">
+      Descubra quanto<br/>
+      <em>sua empresa pode recuperar.</em>
+    </h2>
+    <p class="cta-final-sub">Uma reunião de 10 minutos pode revelar oportunidades que transformam o caixa do seu negócio. Sem custo. Sem compromisso.</p>
+    <div class="cta-final-actions">
+      <a href="#formulario" class="btn-primary" style="font-size:14px; padding:18px 44px">
+        &#128269; Solicitar Análise Gratuita
+      </a>
+      <a href="https://wa.me/5519316720331" target="_blank" class="btn-secondary" style="font-size:13px">
+        &#128172; Conversar no WhatsApp
+      </a>
+    </div>
+    <p class="cta-final-disclaimer">Análise gratuita · Sem compromisso · Honorários apenas no êxito</p>
+  </div>
+</section>
+
+<!-- ─── FORMULÁRIO ─── -->
+<section id="formulario">
+  <div class="container">
+    <div class="form-wrapper">
+      <div class="form-left">
+        <div class="section-label">Diagnóstico Gratuito</div>
+        <h2 class="form-title">Solicite sua<br/><span class="gold">análise fiscal</span><br/>agora mesmo.</h2>
+        <p class="form-desc">Preencha o formulário ao lado e um especialista da CGE entrará em contato em até <strong style="color:var(--white)">24 horas úteis</strong> para agendar sua reunião estratégica.</p>
+        <div class="form-perks">
+          <div class="form-perk">Diagnóstico 100% gratuito e sem compromisso</div>
+          <div class="form-perk">Reunião estratégica de aproximadamente 10 minutos</div>
+          <div class="form-perk">Análise dos últimos 5 anos de histórico fiscal</div>
+          <div class="form-perk">Relatório com créditos identificados antes de qualquer contrato</div>
+          <div class="form-perk">Equipe de contadores e advogados tributários especializados</div>
+          <div class="form-perk">Honorários apenas sobre o valor recuperado, no êxito</div>
+        </div>
+      </div>
+      <div class="form-right">
+        <div class="form-heading">Comece agora — é gratuito</div>
+        <div class="form-sub">Preencha os dados abaixo para agendar sua análise.</div>
+        <form id="lead-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Nome Completo</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" required />
+            </div>
+            <div class="form-group">
+              <label for="faturamento">Faturamento Médio Mensal</label>
+              <select id="faturamento" name="faturamento" required>
+                <option value="" disabled selected>Selecione</option>
+                <option>Até R$ 100 mil</option>
+                <option>R$ 100k – R$ 300k</option>
+                <option>R$ 300k – R$ 500k</option>
+                <option>R$ 500k – R$ 1 milhão</option>
+                <option>R$ 1M – R$ 5M</option>
+                <option>Acima de R$ 5M</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefone">Telefone / WhatsApp</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail Corporativo</label>
+              <input type="email" id="email" name="email" placeholder="email@empresa.com.br" required />
+            </div>
+          </div>
+          <button type="submit" class="form-submit">
+            &#128269; Solicitar Diagnóstico Gratuito →
+          </button>
+          <p class="form-disclaimer">Seus dados estão seguros. Não realizamos spam.<br/>Entraremos em contato em até 24 horas úteis.</p>
+        </form>
+        <div id="form-success" style="display:none; text-align:center; padding:40px 20px;">
+          <div style="font-size:48px; margin-bottom:16px;">✅</div>
+          <div style="font-family:var(--serif); font-size:24px; color:var(--gold); margin-bottom:12px;">Recebemos sua solicitação!</div>
+          <p style="color:var(--white-dim); font-size:15px; line-height:1.7;">Nossa equipe entrará em contato em até 24 horas úteis para agendar sua reunião estratégica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#hero" style="display:inline-flex; margin-bottom:20px;">
+          <div class="nav-logo-icon">CGE</div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">CGE</span>
+            <span class="nav-logo-sub">Contadores & Advogados Associados</span>
+          </div>
+        </a>
+        <p class="footer-tagline">Recupere tributos pagos indevidamente com segurança e inteligência.</p>
+        <div class="footer-contact">
+          <a href="tel:+551931672033">📞 (19) 3167-2033</a>
+          <a href="mailto:sac@cgesolucoes.com.br">✉ sac@cgesolucoes.com.br</a>
+          <a href="https://www.cgesolucoes.com.br" target="_blank">🌐 cgesolucoes.com.br</a>
+          <a href="https://www.instagram.com/cge.solucoes" target="_blank">📷 @cge.solucoes</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <div class="footer-col-links">
+          <a href="#how">Como Funciona</a>
+          <a href="#beneficios">Benefícios</a>
+          <a href="#diferenciais">Diferenciais</a>
+          <a href="#tecnologia">Tecnologia</a>
+          <a href="#publico">Setores Atendidos</a>
+          <a href="#faq">Perguntas Frequentes</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Fale Conosco</div>
+        <div class="footer-col-links">
+          <a href="https://wa.me/5519316720331" target="_blank">WhatsApp Direto</a>
+          <a href="#formulario">Solicitar Análise</a>
+          <a href="mailto:sac@cgesolucoes.com.br">E-mail</a>
+        </div>
+        <div style="margin-top:28px;">
+          <div class="footer-col-title">Especialidades</div>
+          <div class="footer-col-links">
+            <a href="#faq">PIS / COFINS</a>
+            <a href="#faq">ICMS / ISS</a>
+            <a href="#faq">IRPJ / CSLL</a>
+            <a href="#faq">Contribuições Prev.</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">© 2025 CGE Contadores & Advogados Associados. Todos os direitos reservados.</p>
+      <p class="footer-bottom-since">Desde 1990 · 35 anos de excelência tributária</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT ─── -->
+<a href="https://wa.me/5519316720331?text=Olá!%20Gostaria%20de%20solicitar%20uma%20análise%20tributária%20gratuita." target="_blank" class="whatsapp-float" aria-label="Fale no WhatsApp">
+  <span class="whatsapp-tooltip">Falar com especialista</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // ─── NAV SCROLL EFFECT ───
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ─── FAQ ACCORDION ───
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // ─── FORM SUBMIT ───
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('lead-form');
+    const success = document.getElementById('form-success');
+
+    // Aqui integraria com CRM / API
+    const data = {
+      name: form.name.value,
+      empresa: form.empresa.value,
+      faturamento: form.faturamento.value,
+      telefone: form.telefone.value,
+      email: form.email.value,
+      timestamp: new Date().toISOString(),
+      source: 'landing-page-cge'
+    };
+    console.log('Lead CGE:', data);
+    // fetch('/api/leads', { method: 'POST', body: JSON.stringify(data) });
+
+    form.style.display = 'none';
+    success.style.display = 'block';
+  }
+
+  // ─── INTERSECTION OBSERVER ANIMATIONS ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.tech-card, .beneficio-item, .problem-card, .step, .diferencial-item, .publico-tag').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // ─── PHONE MASK ───
+  document.getElementById('telefone').addEventListener('input', function(e) {
+    let v = e.target.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.slice(0, 11);
+    if (v.length > 7) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    else if (v.length > 0) v = `(${v}`;
+    e.target.value = v;
+  });
+</script>
+</body>
+</html>
